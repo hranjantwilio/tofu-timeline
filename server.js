@@ -12,11 +12,11 @@ app.use(bodyParser.json());
 
 // Salesforce Connection
 const conn = new jsforce.Connection({
-  loginUrl: process.env.SF_LOGIN_URL
+  loginUrl: "https://test.salesforce.com"
 });
 
 // Login to Salesforce
-conn.login(process.env.SF_USER, process.env.SF_PASSWORD, (err, userInfo) => {
+conn.login("hranjan@twilio.com.tofuheroku", "Dhn2024*", (err, userInfo) => {
   if (err) {
     return console.error('Salesforce Login Error:', err);
   }
