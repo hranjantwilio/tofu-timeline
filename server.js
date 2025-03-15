@@ -58,6 +58,7 @@ app.get('/accounts', async (req, res) => {
 // Read Activities with Query Pagination using queryMore()
 app.post('/asyncgensummary', async (req, res) => {
   try {
+    console.log('Request Body:', req.body);
     const accountId = req.params.accountId;
     const queryText = req.params.queryText;
     const assisstantPrompt = req.params.assisstantPrompt;
