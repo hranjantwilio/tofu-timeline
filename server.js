@@ -73,14 +73,30 @@ app.post('/asyncgensummary', async (req, res) => {
     let records = [];
     let groupedData={};    
     console.log('before query');
-    let result = await conn.query(queryText);
-    records.push(...result.records);
+    // let result = await conn.query(queryText);
+    // records.push(...result.records);
+
+    const bulkJob = conn.bulk.query(queryText);
+
+    bulkJob.stream()
+      .on("record", (record) => {
+        records.push(record); // Store in JS object
+      })
+      .on("error", (err) => {
+        console.error("Bulk Query Error:", err);
+      })
+      .on("end", () => {
+        console.log("Bulk Query Completed");
+        console.log(`Fetched ${records.length} records.`);
+        console.log(records); // Print or use the object as needed
+      });
+
 
     console.log('after query 1'); 
-    while (!result.done) {
-      result = await conn.queryMore(result.nextRecordsUrl);
-      records.push(...result.records);
-    }
+    // while (!result.done) {
+    //   result = await conn.queryMore(result.nextRecordsUrl);
+    //   records.push(...result.records);
+    // }
 
     console.log('after querymore'); 
     console.log(records); 
