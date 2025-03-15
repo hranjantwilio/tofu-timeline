@@ -95,7 +95,7 @@ app.post('/asyncgensummary', async (req, res) => {
 
 
 
-    records = await (await bulk2.query(queryText)).toArray();
+    records = await (await conn.bulk2.query(queryText)).toArray();
 
 
     // bulkJob
