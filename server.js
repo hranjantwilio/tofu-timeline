@@ -85,7 +85,7 @@ app.post('/asyncgensummary', async (req, res) => {
     console.log('after querymore'); 
     console.log(records); 
     records.forEach(activity => {
-        const date = new Date(activity.fields.activitydate); // Assuming 'date' is in a valid format
+        const date = new Date(activity.ActivityDate); // Assuming 'date' is in a valid format
         const year = date.getFullYear();
         const month = date.toLocaleString('en-US', { month: 'long' });
 
@@ -102,7 +102,7 @@ app.post('/asyncgensummary', async (req, res) => {
             groupedData[year].push(monthEntry);
         }
 
-        monthEntry[key].push(activity.fields.description);
+        monthEntry[key].push(activity.Description);
     });
 
     const openai = new OpenAI({
