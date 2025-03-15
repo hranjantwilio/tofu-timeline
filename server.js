@@ -182,12 +182,12 @@ app.post('/asyncgensummary', async (req, res) => {
         headers: {'Content-Type': 'application/json'}
     }
     
-    const callbackResponse = await org.request(data.callbackUrl, opts);
+    //const callbackResponse = await org.request(data.callbackUrl, opts);
     //logger.info(JSON.stringify(callbackResponse));
     
 
 
-    res.send({ success: true, records });
+    res.send({ success: true, opts });
   } catch (err) {
     res.status(500).send({ success: false, error: err.message });
   }
