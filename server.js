@@ -58,14 +58,14 @@ app.get('/accounts', async (req, res) => {
 // Read Activities with Query Pagination using queryMore()
 app.post('/asyncgensummary', async (req, res) => {
   try {
-    console.log('Request Body:', req.params);
-    console.log('Request Body:', JSON.stringify(req.params));
-    const accountId = req.params.accountId;
-    const queryText = req.params.queryText;
-    const assisstantPrompt = req.params.assisstantPrompt;
-    const userPrompt = req.params.userPrompt;
+    console.log('Request Body:', req.body);
+    console.log('Request Body:', JSON.stringify(req.body));
+    const accountId = req.body.accountId;
+    const queryText = req.body.queryText;
+    const assisstantPrompt = req.body.assisstantPrompt;
+    const userPrompt = req.body.userPrompt;
     let summaryRecordsMap={};
-    if(req.params.summaryMap != undefined) {
+    if(req.body.summaryMap != undefined) {
         summaryRecordsMap = Object.entries(JSON.parse(data.summaryMap)).map(([key, value]) => ({ key, value }));
         //logger.info(`summaryRecordsMap: ${JSON.stringify(summaryRecordsMap)}`);
     }
