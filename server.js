@@ -58,7 +58,8 @@ app.get('/accounts', async (req, res) => {
 // Read Activities with Query Pagination using queryMore()
 app.post('/asyncgensummary', async (req, res) => {
   try {
-    console.log('Request Body:', req.body);
+    console.log('Request Body:', req.params);
+    console.log('Request Body:', JSON.stringify(req.params));
     const accountId = req.params.accountId;
     const queryText = req.params.queryText;
     const assisstantPrompt = req.params.assisstantPrompt;
@@ -71,14 +72,18 @@ app.post('/asyncgensummary', async (req, res) => {
 
     let records = [];
     let groupedData={};    
+    console.log('before query');
     let result = await conn.query(queryText);
     records.push(...result.records);
 
+    console.log('after query 1'); 
     while (!result.done) {
       result = await conn.queryMore(result.nextRecordsUrl);
       records.push(...result.records);
     }
 
+    console.log('after querymore'); 
+    console.log(records); 
     records.forEach(activity => {
         const date = new Date(activity.fields.activitydate); // Assuming 'date' is in a valid format
         const year = date.getFullYear();
