@@ -78,18 +78,34 @@ app.post('/asyncgensummary', async (req, res) => {
 
     const bulkJob = conn.bulk.query(queryText);
 
-    bulkJob.stream()
-      .on("record", (record) => {
-        records.push(record); // Store in JS object
-      })
-      .on("error", (err) => {
-        console.error("Bulk Query Error:", err);
-      })
-      .on("end", () => {
-        console.log("Bulk Query Completed");
-        console.log(`Fetched ${records.length} records.`);
-        console.log(records); // Print or use the object as needed
+
+
+    bulkJob.on("record", (record) => {
+        records.push(record);
       });
+  
+      bulkJob.on("error", (err) => {
+        console.error("Bulk Query Error:", err);
+      });
+  
+      bulkJob.on("end", () => {
+        console.log(`Bulk Query Completed. Fetched ${records.length} records.`);
+        console.log(records); // Use the stored data
+      });
+
+
+    // bulkJob.stream()
+    //   .on("record", (record) => {
+    //     records.push(record); // Store in JS object
+    //   })
+    //   .on("error", (err) => {
+    //     console.error("Bulk Query Error:", err);
+    //   })
+    //   .on("end", () => {
+    //     console.log("Bulk Query Completed");
+    //     console.log(`Fetched ${records.length} records.`);
+    //     console.log(records); // Print or use the object as needed
+    //   });
 
 
     console.log('after query 1'); 
