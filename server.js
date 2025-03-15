@@ -6,7 +6,6 @@ const fs = require('fs-extra');
 const path = require('path');
 
 const { OpenAI } = require("openai");
-const fs = require("fs-extra");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
