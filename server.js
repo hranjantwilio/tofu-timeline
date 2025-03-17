@@ -194,7 +194,8 @@ app.post('/asyncgensummary', async (req, res) => {
         2. **Return only the raw JSON object** with no explanations, Markdown formatting, or extra characters. Do not wrap the JSON in triple backticks or include "json" as a specifier.
         3. JSON Structure should be: {"year": {"Q1": {"summary":"quarterly summary","count":"total count of all three months of that quarter from JSON file by summing up the count i.e 200","startdate":"start date of the Quarter"}, "Q2": {"summary":"quarterly summary","count":"total count of all three months of that quarter from JSON file by summing up the count ex:- 200 as total count","startdate":"start date of the Quarter"}, ...}} , Make sure the data is properly categorized for all quarters, based on activityDate
         4. **Ensure JSON is in minified format** (i.e., no extra spaces, line breaks, or special characters).
-        5. The response **must be directly usable with "JSON.parse(response)"**.`);
+        5. The response **must be directly usable with "JSON.parse(response)"**.
+        6.**Ensure JSON doesnot have this error** Expected double-quoted property name in JSON at position`);
                         
     //logger.info(`Quarterlysummary received ${JSON.stringify(Quarterlysummary)}`);
 
